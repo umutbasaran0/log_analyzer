@@ -1,1 +1,1 @@
-﻿# Log Analyzer projesi.
+﻿# Log Analyzer projesi
