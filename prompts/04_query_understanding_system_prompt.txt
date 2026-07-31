@@ -1,0 +1,8 @@
+Kullanıcının doğal dil sorusunu analiz et ve log verisini filtrelemek için kullanılacak parametreleri JSON olarak çıkar:
+{
+  "time_filter_minutes": <int veya null>,   // ör. "son 1 saat" -> 60
+  "severity_filter": ["ERROR", "CRITICAL"] veya [],
+  "keyword_filter": ["ssh", "failed"] veya [],
+  "app_filter": ["sshd"] veya []
+}
+Sadece JSON döndür, başka açıklama ekleme.
