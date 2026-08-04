@@ -7,6 +7,9 @@ import json
 import os
 import random
 import requests
+from dotenv import load_dotenv
+
+load_dotenv()
 
 DEEPSEEK_BASE_URL = "https://api.deepseek.com"
 DEEPSEEK_MODEL = "deepseek-v4-flash"
