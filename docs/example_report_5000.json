@@ -1,0 +1,123 @@
+{
+  "time_range": {
+    "start": "2026-04-26 07:03:02.436534+00:00",
+    "end": "2026-04-26 08:09:44.382434+00:00"
+  },
+  "total_chunks_analyzed": 14,
+  "overall_summary": "Across the 14 analyzed chunks, the logs reveal sustained network and authentication activity over an approximately one-hour window. There were over 1,100 successful SSH logins and more than 200 failed password attempts, with root, admin, and service accounts heavily targeted. Kernel firewall events (ACCEPT/DROP/REJECT) dominated network logs, while service start messages and HTTP requests to admin/login endpoints appeared frequently. A notable systemic issue is the inconsistent assignment of severity levels, with routine events such as successful logins and service starts marked as CRITICAL or ERROR, which may indicate misconfiguration or deliberate obfuscation. Overall, the pattern suggests possible SSH brute-force attempts, unauthorized privileged access, and web application probing, warranting immediate investigation.",
+  "top_error_types": [
+    {
+      "category": "firewall_reject",
+      "total_count": 485,
+      "note": "Connections rejected by firewall; high frequency may indicate scanning or policy violations."
+    },
+    {
+      "category": "firewall_drop",
+      "total_count": 468,
+      "note": "Connections dropped silently; observed from many source IPs across all hosts."
+    },
+    {
+      "category": "ssh_auth_failure",
+      "total_count": 229,
+      "note": "Failed SSH password attempts across multiple users; likely brute-force activity."
+    },
+    {
+      "category": "http_5xx_error",
+      "total_count": 33,
+      "note": "HTTP 500 responses on login/admin endpoints; possible application vulnerabilities or scanning."
+    }
+  ],
+  "recurring_patterns": [
+    {
+      "pattern": "Repeated failed SSH password attempts against multiple user accounts (root, admin, service, bob, alice) from diverse source IPs",
+      "chunks_seen_in": 14
+    },
+    {
+      "pattern": "Successful SSH logins for privileged accounts (root, admin, service) with inconsistent high severity levels",
+      "chunks_seen_in": 14
+    },
+    {
+      "pattern": "High volume of kernel firewall DROP/REJECT events from numerous source IPs",
+      "chunks_seen_in": 14
+    },
+    {
+      "pattern": "Service startup events (sshd, nginx, cron, sudo, kernel) logged at ERROR/CRITICAL severity",
+      "chunks_seen_in": 12
+    },
+    {
+      "pattern": "HTTP requests to sensitive endpoints (/admin, /login) with error statuses and unusual severity labels",
+      "chunks_seen_in": 13
+    }
+  ],
+  "anomalies_ranked": [
+    {
+      "description": "Successful root SSH login from a public IP after multiple failed attempts",
+      "severity": "CRITICAL",
+      "reason": "Root account is privileged; a success beyond failures indicates likely credential compromise or unauthorized access."
+    },
+    {
+      "description": "Distributed SSH brute-force attack against root, admin, service, alice, and bob accounts across all chunks",
+      "severity": "HIGH",
+      "reason": "Hundreds of failed password attempts from many source IPs in a short span."
+    },
+    {
+      "description": "Large number of successful SSH logins for privileged accounts from multiple source IPs with abnormal CRITICAL/ERROR severity",
+      "severity": "HIGH",
+      "reason": "Indicates either compromised credentials or logging misconfiguration; requires investigation."
+    },
+    {
+      "description": "Kernel/service startup messages reported repeatedly with CRITICAL severity across hosts",
+      "severity": "MEDIUM",
+      "reason": "Could indicate unexpected restarts, log spoofing, or misconfigured severity."
+    },
+    {
+      "description": "SSH connections using non-standard source ports (53, 80, 443)",
+      "severity": "MEDIUM",
+      "reason": "Unusual for SSH clients; may indicate tunneling, proxy, or evasion attempts."
+    },
+    {
+      "description": "HTTP requests to /admin and /login endpoints returning 500 errors",
+      "severity": "MEDIUM",
+      "reason": "Possible web application vulnerability scanning or unauthorized admin access attempts."
+    },
+    {
+      "description": "Inconsistent severity assignments for identical benign events",
+      "severity": "LOW",
+      "reason": "May hide real incidents or indicate log management issues."
+    }
+  ],
+  "security_signals": [
+    {
+      "description": "SSH brute-force attack (multiple failed passwords across accounts and source IPs)",
+      "severity": "HIGH",
+      "reason": "Pattern typical of credential stuffing."
+    },
+    {
+      "description": "Successful root/admin SSH login from external IPs",
+      "severity": "CRITICAL",
+      "reason": "Privileged access from public IPs is high-risk and may indicate compromise."
+    },
+    {
+      "description": "Port scanning or network probing indicated by firewall DROP/REJECT from diverse source IPs",
+      "severity": "MEDIUM",
+      "reason": "High volume of firewall denials suggests reconnaissance."
+    },
+    {
+      "description": "Web application scanning or attempted admin access via /admin and /login endpoints",
+      "severity": "MEDIUM",
+      "reason": "Requests to sensitive endpoints with 500s and unusual severity labels."
+    },
+    {
+      "description": "Unusual source ports (80, 443, 53) in SSH connections",
+      "severity": "LOW",
+      "reason": "May indicate covert communication or proxy use."
+    }
+  ],
+  "total_raw_records": 5000,
+  "total_windows": 14,
+  "compression_summary": {
+    "total_raw_records": 5000,
+    "total_unique_templates_across_windows": 1400,
+    "avg_compression_ratio": 3.57
+  }
+}
