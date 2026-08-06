@@ -53,6 +53,15 @@ def run(args): # Pipeline çalıştırır
     print("[main] Genel rapor oluşturuluyor (reduce adımı)...")
     final_report = build_final_report(chunk_results, client, cost_tracker) # Parça analizleri tek bir ana yönetici özetinde birleştir
 
+    # Sıkıştırma özetini hesapla ve rapora ekle
+    total_raw = sum(c["record_count"] for c in chunk_results)
+    total_templates = sum(c["compression"]["unique_template_count"] for c in chunk_results)
+    final_report["compression_summary"] = {
+        "total_raw_records": total_raw,
+        "total_unique_templates_across_windows": total_templates,
+        "avg_compression_ratio": round(total_raw / max(total_templates, 1), 2),
+    }
+
     if args.ask: # Kullanıcı argüman olarak bir soru sorduysa 
         print(f"[main] Soru cevaplanıyor: {args.ask}")
         qa_result = answer_question(args.ask, records, client, cost_tracker, final_report=final_report)
