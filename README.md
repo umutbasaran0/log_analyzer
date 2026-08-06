@@ -89,9 +89,9 @@ kategorileri, güvenlik sinyalleri) ve konsolda maliyet özeti (token sayıları
 
 ## Proje Yapısı
 
-​```text
+```text
 log_analyzer/
-├── siem/                   
+├── siem/
 │   ├── __init__.py
 │   ├── syslog_parser.py    # Ham log satırlarını LogRecord nesnelerine ayrıştırır
 │   ├── templater.py        # Logları şablonlayıp gruplar
@@ -105,17 +105,17 @@ log_analyzer/
 │   └── main.py             # CLI giriş noktası
 ├── scripts/
 │   └── download_sample.py  # Hugging Face'ten örnek veri indirme aracı
-├── prompts/                
+├── prompts/
 │   ├── 01_chunk_analysis_system_prompt.txt
 │   ├── 02_reduce_system_prompt.txt
 │   ├── 03_qa_system_prompt.txt
 │   └── 04_query_understanding_system_prompt.txt
-├── docs/                   
-├── sample_data/            
+├── docs/
+├── sample_data/
 ├── requirements.txt
 ├── .gitignore
 └── README.md
-​```
+```
 
 ## Dokümantasyon
 
