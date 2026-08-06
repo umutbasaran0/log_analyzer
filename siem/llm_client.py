@@ -7,6 +7,7 @@ import json
 import os
 import random
 import requests
+import time
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -176,28 +177,39 @@ class LLMClient:
         return result, {"prompt_tokens": prompt_tokens, "completion_tokens": completion_tokens}
 
 
-    def chat_json(self, system_prompt: str, user_content: str, stage: str = "generic"): # DeepSeek LLM API'sine istek atar. mock mod aktifse yerel mock yanıtlarını döner
+    def chat_json(self, system_prompt: str, user_content: str, stage: str = "generic", max_retries: int = 4): # DeepSeek LLM API'sine istek atar. mock mod aktifse yerel mock yanıtlarını döner
         if self.mock: # Eğer mock mod açıksa 
             return self._mock_response(stage, user_content)
 
-        resp = requests.post( # Gerçek DeepSeek API sunucusuna HTTPS POST isteği gönder
-            f"{DEEPSEEK_BASE_URL}/chat/completions",
-            headers={
-                "Content-Type": "application/json",
-                "Authorization": f"Bearer {self.api_key}", # API anahtarı 
-            },
-            json={
-                "model": DEEPSEEK_MODEL, 
-                "temperature": 0.2, # Yaratıcılığı düşür ve tutarlı sonuçlar ver
-                "response_format": {"type": "json_object"}, # JSON nesnesi olarak yanıt al
-                "messages": [
-                    {"role": "system", "content": system_prompt}, # Yapay zekaya rolü ve kuralları veren talimat
-                    {"role": "user", "content": user_content}, # Yapay zekaya analiz için gönderilen veri-soru
-                ],
-            },
-            timeout=120, # Yanıt için en fazla 120 saniye bekle
-        )
-        resp.raise_for_status() # İstekte bir hata varsa programı durdurup hata fırlat
+        wait = 5
+        for attempt in range(1, max_retries + 1):
+            try:
+                resp = requests.post( # Gerçek DeepSeek API sunucusuna HTTPS POST isteği gönder
+                    f"{DEEPSEEK_BASE_URL}/chat/completions",
+                    headers={
+                        "Content-Type": "application/json",
+                        "Authorization": f"Bearer {self.api_key}", # API anahtarı 
+                    },
+                    json={
+                        "model": DEEPSEEK_MODEL, 
+                        "temperature": 0.2, # Yaratıcılığı düşür ve tutarlı sonuçlar ver
+                        "response_format": {"type": "json_object"}, # JSON nesnesi olarak yanıt al
+                        "messages": [
+                            {"role": "system", "content": system_prompt}, # Yapay zekaya rolü ve kuralları veren talimat
+                            {"role": "user", "content": user_content}, # Yapay zekaya analiz için gönderilen veri-soru
+                        ],
+                    },
+                    timeout=120, # Yanıt için en fazla 120 saniye bekle
+                )
+                resp.raise_for_status() # İstekte bir hata varsa programı durdurup hata fırlat
+                break
+            except requests.exceptions.RequestException as e: 
+                if attempt == max_retries:
+                    raise
+                print(f"  [!] LLM istegi basarisiz ({type(e).__name__}). {wait} sn bekleyip tekrar deneniyor... ({attempt}/{max_retries})")
+                time.sleep(wait)
+                wait = min(wait * 2, 60)
+
         data = resp.json()
         content = data["choices"][0]["message"]["content"] # Yapay zekanın yazdığı metin içeriği
         usage = data.get("usage", {}) # Harcanan gerçek token bilgileri
