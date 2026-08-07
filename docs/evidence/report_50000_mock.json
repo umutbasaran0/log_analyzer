@@ -1,0 +1,26 @@
+{
+  "total_chunks_analyzed": 7,
+  "overall_summary": "[MOCK] 7 zaman penceresi analiz edildi. Toplam 0 kayit islendi. 0 potansiyel anomali sinyali tespit edildi.",
+  "top_error_types": [],
+  "recurring_patterns": [],
+  "anomalies_ranked": [],
+  "security_signals": [],
+  "severity_breakdown_total": {
+    "DEBUG": 0,
+    "INFO": 0,
+    "WARNING": 0,
+    "ERROR": 0,
+    "CRITICAL": 0
+  },
+  "time_range": {
+    "start": "2026-04-26 07:03:02.436534+00:00",
+    "end": "2026-04-26 18:11:06.888018+00:00"
+  },
+  "total_raw_records": 50000,
+  "total_windows": 134,
+  "compression_summary": {
+    "total_raw_records": 50000,
+    "total_unique_templates_across_windows": 13715,
+    "avg_compression_ratio": 3.65
+  }
+}

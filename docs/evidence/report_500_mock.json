@@ -1,0 +1,291 @@
+{
+  "total_chunks_analyzed": 2,
+  "overall_summary": "[MOCK] 2 zaman penceresi analiz edildi. Toplam 500 kayit islendi. 34 potansiyel anomali sinyali tespit edildi.",
+  "top_error_types": [
+    {
+      "category": "ssh_auth",
+      "total_count": 107,
+      "note": "toplam gozlem sayisi"
+    },
+    {
+      "category": "firewall_net",
+      "total_count": 85,
+      "note": "toplam gozlem sayisi"
+    },
+    {
+      "category": "http_traffic",
+      "total_count": 19,
+      "note": "toplam gozlem sayisi"
+    },
+    {
+      "category": "privileged_command",
+      "total_count": 7,
+      "note": "toplam gozlem sayisi"
+    },
+    {
+      "category": "cron_job",
+      "total_count": 6,
+      "note": "toplam gozlem sayisi"
+    }
+  ],
+  "recurring_patterns": [
+    {
+      "pattern": "firewall_net",
+      "chunks_seen_in": 2
+    },
+    {
+      "pattern": "ssh_auth",
+      "chunks_seen_in": 2
+    },
+    {
+      "pattern": "privileged_command",
+      "chunks_seen_in": 2
+    },
+    {
+      "pattern": "cron_job",
+      "chunks_seen_in": 2
+    },
+    {
+      "pattern": "http_traffic",
+      "chunks_seen_in": 2
+    }
+  ],
+  "anomalies_ranked": [
+    {
+      "description": "CRITICAL seviyeli olay: Connection ACCEPT <IP> -> <IP>",
+      "severity": "CRITICAL",
+      "evidence_template": "Connection ACCEPT <IP> -> <IP>",
+      "reason": "Severity=CRITICAL olarak isaretlenmis kayit tespit edildi."
+    },
+    {
+      "description": "CRITICAL seviyeli olay: Accepted password for service from <IP>",
+      "severity": "CRITICAL",
+      "evidence_template": "Accepted password for service from <IP>",
+      "reason": "Severity=CRITICAL olarak isaretlenmis kayit tespit edildi."
+    },
+    {
+      "description": "CRITICAL seviyeli olay: Connection DROP <IP> -> <IP>",
+      "severity": "CRITICAL",
+      "evidence_template": "Connection DROP <IP> -> <IP>",
+      "reason": "Severity=CRITICAL olarak isaretlenmis kayit tespit edildi."
+    },
+    {
+      "description": "CRITICAL seviyeli olay: Accepted password for admin from <IP>",
+      "severity": "CRITICAL",
+      "evidence_template": "Accepted password for admin from <IP>",
+      "reason": "Severity=CRITICAL olarak isaretlenmis kayit tespit edildi."
+    },
+    {
+      "description": "CRITICAL seviyeli olay: Connection REJECT <IP> -> <IP>",
+      "severity": "CRITICAL",
+      "evidence_template": "Connection REJECT <IP> -> <IP>",
+      "reason": "Severity=CRITICAL olarak isaretlenmis kayit tespit edildi."
+    },
+    {
+      "description": "CRITICAL seviyeli olay: cron started",
+      "severity": "CRITICAL",
+      "evidence_template": "cron started",
+      "reason": "Severity=CRITICAL olarak isaretlenmis kayit tespit edildi."
+    },
+    {
+      "description": "CRITICAL seviyeli olay: Accepted password for root from <IP>",
+      "severity": "CRITICAL",
+      "evidence_template": "Accepted password for root from <IP>",
+      "reason": "Severity=CRITICAL olarak isaretlenmis kayit tespit edildi."
+    },
+    {
+      "description": "CRITICAL seviyeli olay: Accepted password for alice from <IP>",
+      "severity": "CRITICAL",
+      "evidence_template": "Accepted password for alice from <IP>",
+      "reason": "Severity=CRITICAL olarak isaretlenmis kayit tespit edildi."
+    },
+    {
+      "description": "CRITICAL seviyeli olay: Accepted password for bob from <IP>",
+      "severity": "CRITICAL",
+      "evidence_template": "Accepted password for bob from <IP>",
+      "reason": "Severity=CRITICAL olarak isaretlenmis kayit tespit edildi."
+    },
+    {
+      "description": "CRITICAL seviyeli olay: Failed password for service from <IP>",
+      "severity": "CRITICAL",
+      "evidence_template": "Failed password for service from <IP>",
+      "reason": "Severity=CRITICAL olarak isaretlenmis kayit tespit edildi."
+    },
+    {
+      "description": "CRITICAL seviyeli olay: GET /login <NUM>",
+      "severity": "CRITICAL",
+      "evidence_template": "GET /login <NUM>",
+      "reason": "Severity=CRITICAL olarak isaretlenmis kayit tespit edildi."
+    },
+    {
+      "description": "CRITICAL seviyeli olay: nginx started",
+      "severity": "CRITICAL",
+      "evidence_template": "nginx started",
+      "reason": "Severity=CRITICAL olarak isaretlenmis kayit tespit edildi."
+    },
+    {
+      "description": "CRITICAL seviyeli olay: GET /admin <NUM>",
+      "severity": "CRITICAL",
+      "evidence_template": "GET /admin <NUM>",
+      "reason": "Severity=CRITICAL olarak isaretlenmis kayit tespit edildi."
+    },
+    {
+      "description": "CRITICAL seviyeli olay: sshd started",
+      "severity": "CRITICAL",
+      "evidence_template": "sshd started",
+      "reason": "Severity=CRITICAL olarak isaretlenmis kayit tespit edildi."
+    },
+    {
+      "description": "CRITICAL seviyeli olay: POST / <NUM>",
+      "severity": "CRITICAL",
+      "evidence_template": "POST / <NUM>",
+      "reason": "Severity=CRITICAL olarak isaretlenmis kayit tespit edildi."
+    },
+    {
+      "description": "CRITICAL seviyeli olay: kernel started",
+      "severity": "CRITICAL",
+      "evidence_template": "kernel started",
+      "reason": "Severity=CRITICAL olarak isaretlenmis kayit tespit edildi."
+    },
+    {
+      "description": "CRITICAL seviyeli olay: POST /login <NUM>",
+      "severity": "CRITICAL",
+      "evidence_template": "POST /login <NUM>",
+      "reason": "Severity=CRITICAL olarak isaretlenmis kayit tespit edildi."
+    },
+    {
+      "description": "CRITICAL seviyeli olay: GET / <NUM>",
+      "severity": "CRITICAL",
+      "evidence_template": "GET / <NUM>",
+      "reason": "Severity=CRITICAL olarak isaretlenmis kayit tespit edildi."
+    },
+    {
+      "description": "CRITICAL seviyeli olay: POST /admin <NUM>",
+      "severity": "CRITICAL",
+      "evidence_template": "POST /admin <NUM>",
+      "reason": "Severity=CRITICAL olarak isaretlenmis kayit tespit edildi."
+    },
+    {
+      "description": "CRITICAL seviyeli olay: Failed password for root from <IP>",
+      "severity": "CRITICAL",
+      "evidence_template": "Failed password for root from <IP>",
+      "reason": "Severity=CRITICAL olarak isaretlenmis kayit tespit edildi."
+    },
+    {
+      "description": "CRITICAL seviyeli olay: Accepted password for bob from <IP>",
+      "severity": "CRITICAL",
+      "evidence_template": "Accepted password for bob from <IP>",
+      "reason": "Severity=CRITICAL olarak isaretlenmis kayit tespit edildi."
+    },
+    {
+      "description": "CRITICAL seviyeli olay: Accepted password for alice from <IP>",
+      "severity": "CRITICAL",
+      "evidence_template": "Accepted password for alice from <IP>",
+      "reason": "Severity=CRITICAL olarak isaretlenmis kayit tespit edildi."
+    },
+    {
+      "description": "CRITICAL seviyeli olay: sshd started",
+      "severity": "CRITICAL",
+      "evidence_template": "sshd started",
+      "reason": "Severity=CRITICAL olarak isaretlenmis kayit tespit edildi."
+    },
+    {
+      "description": "CRITICAL seviyeli olay: Connection REJECT <IP> -> <IP>",
+      "severity": "CRITICAL",
+      "evidence_template": "Connection REJECT <IP> -> <IP>",
+      "reason": "Severity=CRITICAL olarak isaretlenmis kayit tespit edildi."
+    },
+    {
+      "description": "CRITICAL seviyeli olay: Accepted password for root from <IP>",
+      "severity": "CRITICAL",
+      "evidence_template": "Accepted password for root from <IP>",
+      "reason": "Severity=CRITICAL olarak isaretlenmis kayit tespit edildi."
+    },
+    {
+      "description": "CRITICAL seviyeli olay: Connection DROP <IP> -> <IP>",
+      "severity": "CRITICAL",
+      "evidence_template": "Connection DROP <IP> -> <IP>",
+      "reason": "Severity=CRITICAL olarak isaretlenmis kayit tespit edildi."
+    },
+    {
+      "description": "CRITICAL seviyeli olay: Accepted password for service from <IP>",
+      "severity": "CRITICAL",
+      "evidence_template": "Accepted password for service from <IP>",
+      "reason": "Severity=CRITICAL olarak isaretlenmis kayit tespit edildi."
+    },
+    {
+      "description": "CRITICAL seviyeli olay: sudo started",
+      "severity": "CRITICAL",
+      "evidence_template": "sudo started",
+      "reason": "Severity=CRITICAL olarak isaretlenmis kayit tespit edildi."
+    },
+    {
+      "description": "CRITICAL seviyeli olay: Accepted password for admin from <IP>",
+      "severity": "CRITICAL",
+      "evidence_template": "Accepted password for admin from <IP>",
+      "reason": "Severity=CRITICAL olarak isaretlenmis kayit tespit edildi."
+    },
+    {
+      "description": "CRITICAL seviyeli olay: Failed password for service from <IP>",
+      "severity": "CRITICAL",
+      "evidence_template": "Failed password for service from <IP>",
+      "reason": "Severity=CRITICAL olarak isaretlenmis kayit tespit edildi."
+    },
+    {
+      "description": "CRITICAL seviyeli olay: POST / <NUM>",
+      "severity": "CRITICAL",
+      "evidence_template": "POST / <NUM>",
+      "reason": "Severity=CRITICAL olarak isaretlenmis kayit tespit edildi."
+    },
+    {
+      "description": "CRITICAL seviyeli olay: kernel started",
+      "severity": "CRITICAL",
+      "evidence_template": "kernel started",
+      "reason": "Severity=CRITICAL olarak isaretlenmis kayit tespit edildi."
+    },
+    {
+      "description": "CRITICAL seviyeli olay: Connection ACCEPT <IP> -> <IP>",
+      "severity": "CRITICAL",
+      "evidence_template": "Connection ACCEPT <IP> -> <IP>",
+      "reason": "Severity=CRITICAL olarak isaretlenmis kayit tespit edildi."
+    },
+    {
+      "description": "CRITICAL seviyeli olay: Failed password for alice from <IP>",
+      "severity": "CRITICAL",
+      "evidence_template": "Failed password for alice from <IP>",
+      "reason": "Severity=CRITICAL olarak isaretlenmis kayit tespit edildi."
+    }
+  ],
+  "security_signals": [
+    {
+      "description": "CRITICAL seviyeli olay: sshd started",
+      "severity": "CRITICAL",
+      "evidence_template": "sshd started",
+      "reason": "Severity=CRITICAL olarak isaretlenmis kayit tespit edildi."
+    },
+    {
+      "description": "CRITICAL seviyeli olay: sshd started",
+      "severity": "CRITICAL",
+      "evidence_template": "sshd started",
+      "reason": "Severity=CRITICAL olarak isaretlenmis kayit tespit edildi."
+    }
+  ],
+  "severity_breakdown_total": {
+    "DEBUG": 104,
+    "INFO": 107,
+    "WARNING": 98,
+    "ERROR": 84,
+    "CRITICAL": 107
+  },
+  "time_range": {
+    "start": "2026-04-26 07:03:02.436534+00:00",
+    "end": "2026-04-26 07:09:40.942832+00:00"
+  },
+  "total_raw_records": 500,
+  "total_windows": 2,
+  "compression_summary": {
+    "total_raw_records": 500,
+    "total_unique_templates_across_windows": 170,
+    "avg_compression_ratio": 2.94
+  }
+}
