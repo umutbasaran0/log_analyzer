@@ -53,7 +53,7 @@ başarmıştır.
 
 **150 satır (map-reduce bütünleşmesi, tek pencereye sığan senaryo):**
 Kayıtlar 3 alt-parçaya ayrılmış, toplam maliyet **~$0.002**. Veri tek bir zaman penceresine
-sığdığı için `aggregator.py`'nin "akıllı bypass" mekanizması (bkz. `01_architecture.md`) devreye
+sığdığı için `aggregator.py`'nin "akıllı bypass" mekanizması devreye
 girmiş, gereksiz bir reduce çağrısı yapılmadan doğrudan map çıktısı nihai rapor olarak kullanılmış
 — bu senaryoda maliyet %50 tasarruf etmiştir.
 
@@ -67,6 +67,6 @@ katlanarak artardı.
 
 Bölüm 1'deki kademeli tabloya ek olarak, `qa.py`'nin bağımsız maliyeti önemli — çünkü bir kere
 analiz raporu üretildikten sonra, kullanıcı istediği kadar soru sorabilir, her soru **tam analizin
-değil, sadece retrieval+QA'nın maliyetini** taşır (~$0.003-0.005/soru, bkz.
+değil, sadece retrieval+QA'nın maliyetini** taşır (~$0.0058/soru, bkz.
 `02_sample_results.md`'deki 6 örnek soru). Bu, tekrarlayan sorgulamalarda pipeline'ın en
 maliyet-etkin kısmı.

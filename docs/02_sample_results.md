@@ -46,7 +46,7 @@ python -m siem.main --input sample_data\sample_5000.txt --window-minutes 5 --out
 - Benzersiz şablon sayısı (14 pencere toplamı): 1.400
 - Ortalama sıkıştırma oranı: **3.57x**
 
-Tam JSON çıktısı için bkz. [docs/example_report_5000.json](./example_report_5000.json).
+Tam JSON çıktısı için bkz. [docs/evidence/report_5000_real.json](./evidence/report_5000_real.json).
 
 ## 2. Doğal Dil Soru-Cevap Örnekleri
 

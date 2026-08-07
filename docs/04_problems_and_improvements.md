@@ -104,15 +104,25 @@
   **Çözüm:** `build_final_report` içinde `while` döngüsüyle hiyerarşik (kademeli) özetleme
   kuruldu — 20'şerli gruplar halinde, analiz sayısı 20'nin altına inene kadar tekrar tekrar
   özetleniyor.
-- **Bilinen sınırlama:** Hiyerarşik reduce'ta, bir katmanın çıktı şeması
+- **Sorun:** Hiyerarşik reduce'ta, bir katmanın çıktı şeması
   (`REDUCE_SYSTEM_PROMPT`'un ürettiği `severity_breakdown_total`, `top_error_types` gibi alanlar)
   bir sonraki katmanın **girdi olarak beklediği** şemayla (`chunk_analysis`'in `severity_breakdown`,
-  `top_categories` alanları) uyuşmuyor. Bu, mock modda 20+ pencereli (ör. 50.000 satır, 134
-  pencere) çalıştırmalarda tüm istatistiklerin (`0` kayıt, `[]` anomali) sıfırlanmasına yol açtı —
-  `report_50000_mock.json`'da gözlemlendi (`total_chunks_analyzed: 7` — bu, orijinal 134 pencereyi
-  değil, son katmandaki 7 batch özetini sayıyor). **Öneri:** `_mock_reduce`'un/`REDUCE_SYSTEM_PROMPT`'un
-  anahtar isimlerini normalize etmesi, ya da girdinin "chunk analizi mi, önceki reduce çıktısı mı"
-  olduğunu ayırt edip buna göre okuması gerekiyor.
+  `top_categories` alanları) uyuşmuyordu. Bu, mock modda 20+ pencereli (ör. 50.000 satır, 134
+  pencere) çalıştırmalarda tüm istatistiklerin (`0` kayıt, `[]` anomali) sıfırlanmasına yol
+  açıyordu — `docs/evidence/report_50000_mock.json`'da gözlemlendi (düzeltme öncesi hali,
+  `total_chunks_analyzed: 7`, `overall_summary: "Toplam 0 kayit islendi"`).
+  **Çözüm:** `_mock_reduce`, girdinin hem `chunk_analysis` şemasından (`severity_breakdown`,
+  `anomalies`, `top_categories`) hem de önceki bir reduce çıktısından (`severity_breakdown_total`,
+  `anomalies_ranked`, `top_error_types`) gelebileceğini varsayıp, `or` zinciriyle her iki alan
+  ismini de okuyacak şekilde güncellendi. Düzeltme sonrası `severity_breakdown_total` ve
+  `overall_summary` artık gerçek toplamları (50.000 kayıt) doğru yansıtıyor.
+  **Bilinen kalan tutarsızlık:** `total_chunks_analyzed` alanı, hiyerarşik yapının **son
+  katmanındaki** batch sayısını (7) gösteriyor, gerçek pencere sayısını (134) değil — bu bilgi
+  aynı raporun `total_windows` alanında **doğru** olarak zaten mevcut (kod tarafından, LLM'den
+  bağımsız hesaplanıyor). İleride `total_chunks_analyzed`'in ya kaldırılması ya da `total_windows`
+  ile birleştirilmesi önerilir.
+  **Not:** Bu sorun yalnızca mock modu etkiliyordu — gerçek LLM, JSON'u bağlamsal olarak
+  yorumladığı için (katı dict-key araması yapmadığı için) gerçek API çıktıları hiç etkilenmedi.
 - **Sorun:** Tek pencereli, düşük yoğunluklu dosyalarda veriyi tekrar LLM'e göndermenin gereksiz
   maliyet/zaman kaybı yaratması.
   **Çözüm:** `if len(analyses) > 1` koşuluyla, tek analiz kalmışsa reduce çağrısı atlanıp doğrudan
