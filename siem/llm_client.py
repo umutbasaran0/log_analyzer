@@ -116,13 +116,17 @@ class LLMClient:
         all_categories = {}
         
         for c in chunk_summaries:
-            for k, v in c.get("severity_breakdown", {}).items():
+            sev_dict = c.get("severity_breakdown") or c.get("severity_breakdown_total") or {}
+            for k, v in sev_dict.items():
                 total_sev[k] = total_sev.get(k, 0) + v
 
-            all_anomalies.extend(c.get("anomalies", []))
+            anomalies_list = c.get("anomalies") or c.get("anomalies_ranked") or []
+            all_anomalies.extend(anomalies_list)
 
-            for cat in c.get("top_categories", []):
-                all_categories[cat["category"]] = all_categories.get(cat["category"], 0) + cat["count"]
+            categories_list = c.get("top_categories") or c.get("top_error_types") or []
+            for cat in categories_list:
+                count = cat.get("count", cat.get("total_count", 0)) # top_categories "count", top_error_types "total_count" kullanır
+                all_categories[cat["category"]] = all_categories.get(cat["category"], 0) + count
 
         sev_order = {"CRITICAL": 0, "HIGH": 1, "MEDIUM": 2, "LOW": 3} # Kritiklik derecesine göre anomali sıralama
         all_anomalies.sort(key=lambda a: sev_order.get(a.get("severity", "LOW"), 3))
@@ -141,7 +145,8 @@ class LLMClient:
             "recurring_patterns": [
                 {
                     "pattern": k, 
-                    "chunks_seen_in": sum(1 for c in chunk_summaries if any(cc['category'] == k for cc in c.get('top_categories', [])))
+                    "chunks_seen_in": sum(1 for c in chunk_summaries
+                        if any(cc['category'] == k for cc in (c.get('top_categories') or c.get('top_error_types') or [])))
                 }
                 for k in list(all_categories.keys())[:10]
             ],
