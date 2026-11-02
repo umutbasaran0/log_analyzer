@@ -1,6 +1,6 @@
 # Log Analyzer — LLM-based Syslog Analysis System
 
-🇹🇷 [Türkçe için tıklayın](README.md)
+🇹🇷 [Türkçe README](README.tr.md)
 
 A prototype system that analyzes large-volume syslog data with the help of an
 LLM (DeepSeek Flash v4). Using templating, time/token-based chunking, and
