@@ -2,10 +2,17 @@
 
 🇹🇷 [Türkçe README](README.tr.md)
 
-A prototype system that analyzes large-volume syslog data with the help of an
-LLM (DeepSeek Flash v4). Using templating, time/token-based chunking, and
-RAG-like retrieval, it analyzes millions of log lines in a scalable and
-cost-effective way, without sending the entire dataset directly to the model.
+A Python-based prototype for analyzing syslog data
+using LLMs, regex-based log templating, time/token-based
+chunking, and map-reduce summarization.
+
+The system supports retrieval-augmented natural language
+querying, structured JSON reports, and LLM API cost
+tracking.
+
+The pipeline was tested with synthetic datasets of
+up to 50,000 log lines in mock mode and 5,000 lines
+using the live DeepSeek API.
 
 See [docs/01_architecture.md](docs/01_architecture.md) for a detailed
 architecture description (Turkish; English translation planned).
@@ -43,7 +50,8 @@ a rule-based fake JSON response is returned instead, for free testing.
 
 The project works with a small subset of the
 [vulcansiem/synthetic-syslog-1B](https://huggingface.co/datasets/vulcansiem/synthetic-syslog-1B)
-dataset — tested at prototype scale with sizes ranging from 500 to 50,000 lines:
+dataset — Prototype testing includes mock-mode runs of up to
+50,000 lines and live API runs of up to 5,000 lines:
 
 ```powershell
 python scripts\download_sample.py 500 sample_data\sample_syslog.txt
