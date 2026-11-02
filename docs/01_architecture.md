@@ -14,9 +14,10 @@ pipeline'dan geçirilerek küçültülür.
   olarak (20'şerli gruplar halinde) tek bir genel rapora indirgenir (reduce).
 - **RAG:** Kullanıcı sorusu önce filtrelere çevrilir, ilgili kayıtlar lokal olarak süzülür, sadece bu
   küçük alt küme LLM'e gönderilir — tüm veri değil.
-- **Bellek verimliliği:** Dosya tamamı belleğe alınmadan, generator (`yield`) ile satır satır okunur;
-  böylece veri boyutu ne olursa olsun (teorik olarak) sabit ve düşük bellek kullanımı korunur — bu,
-  yalnızca LLM tarafındaki değil, dosya okuma tarafındaki ölçeklenebilirliği de sağlar.
+-  **Bellek kullanımı:** Syslog dosyaları `yield` tabanlı bir parser ile satır satır okunur. Ancak mevcut
+  `main.py`, ayrıştırılmış kayıtları `list()` ile belleğe almaktadır. Bu nedenle pipeline henüz
+  uçtan uca streaming yapmamaktadır. Daha büyük veri setleri için batch/window bazlı işleme
+  planlanmaktadır.
 - **Sınıflandırma, ilişkilendirme, anomali tespiti ve önceliklendirme:** Her log kaydı uygulama,
   kaynak (host/IP), önem derecesi (severity) ve mesaj içeriğine (şablon) göre sınıflandırılır; LLM
   ayrıca birbiriyle ilişkili kayıt gruplarını (`clusters`) belirler, şüpheli/anormal kayıtları tespit
